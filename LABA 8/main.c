@@ -20,6 +20,7 @@ void process_line(char buffer[])
 
 {
 	char c;// Текущий символ
+	int f = 0;// счетчик лишних символов
 	int word = NO;//признак слова
 	int symb = NO;//индикатор наличия лишних символов
 	int vowel = 0;//счетчик гласных букв
@@ -41,7 +42,7 @@ void process_line(char buffer[])
 			{
 				while (word_ptr < in_ptr)
 
-					*out_ptr++ = *word_ptr++; //
+					*out_ptr++ = *word_ptr++; 
 			}
 			word = NO;
 			symb = NO;
@@ -55,6 +56,7 @@ void process_line(char buffer[])
 			if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) // проверить не является ли этот символ лишним
 			{
 				symb = YES; // в слове есть лишний символ
+				f++;
 			}
 			if (word == NO) // найдена первая буква слова
 			{
@@ -76,4 +78,6 @@ void process_line(char buffer[])
 
 		in_ptr++;
 	} while (c != '\0'); // продолжать до конца строки
+	if (f > 0)
+		printf("words contain extra symbols, such words are deleted \n");
 }
