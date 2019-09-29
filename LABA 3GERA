@@ -1,47 +1,41 @@
-# include <stdio.h>
-# define MAXLINE 1000
+#pragma warning(disable : 4996)
+#include <stdio.h>
 #define YES 1
 #define NO 0
-
-void process_line(char buffer[]);
+#define MAXLINE 1000
 
 int main(void)
 {
-	char line[MAXLINE];
+	char buffer[MAXLINE];
 	printf("please, enter some words \n");
-	gets(line);
-	process_line(line);
-	puts(line);
-	return 0;
-}
-
-void process_line(char buffer[])
-{
-	char c;// Текущий символ
-	int i = 0;//счетчик всех букв
-	int word = NO;//признак слова
-	int symb = NO;//индикатор наличия лишних символов
-	int cur = 0;//позиция текущего символа исходной строки
-	int res = 0;//позиция текущего символа результирующей строк
-	int start;
-	int cnt = 0;
-	int maximum = 0;
-	int max = 0;//макимальное количество букв
-	int b = 0;//адресс начала максимального слова 
-	int j = 0;
+	gets(buffer);
+	char c;          // Текущий символ
+	int f = 0;       // счетчик лишних символов
+	int i = 0 ;      // Счетчки букв в слове
+	int max = 0;     //Количетсво максимальных букв в слове
+	int word = NO;   //признак слова
+	int symb = NO;   //индикатор наличия лишних символов
+	char *in_ptr;	 // указатель на текущий символ входной строки  
+	char *out_ptr;   // указатель на текущий символn выходной строки  
+	char *word_ptr;  // указатель на начало слова 
+	char *max_ptr;   //Увказатель на начало максимального слова
+	word_ptr = buffer;
+	in_ptr = buffer;
+	out_ptr = buffer;
+	max_ptr = buffer;
 
 	do
 	{
-		c = buffer[cur]; // взять текущий символ из буфера
+		c = *in_ptr; // взять текущий символ из буфера
 		if (c == ' ' || c == '.' || c == ',' || c == '\n' || c == '\0' || c == '?' || c == '!' || c == ';' || c == ':' ||
-			c == '-' || c == '_' || c == '(' || c == ')' || c == '\t' || c == '/' || c == '&' || c == '"') // разделитель найден
+			c == '-' || c == '_' || c == '(' || c == ')' || c == '\t' || c == '/' || c == '&' || c == '"' || c == ' ') // разделитель найден
 		{
 			if (word == YES && symb == NO)
 			{
 				if (i > max)
 				{
 					max = i;
-					b = start;
+					max_ptr = word_ptr;
 				}
 			}
 			word = NO;
@@ -55,19 +49,21 @@ void process_line(char buffer[])
 			}
 			if (word == NO) // найдена первая буква слова
 			{
-				start = cur; // запомнить позицию начала слова
+				word_ptr = in_ptr; // запомнить позицию начала слова
 			}
 			word = YES;
 			i++;
 		}
-		cur++;
+		in_ptr;
 	} while (c != '\0');
-	for (j = 0; j <= cur; j++)
+	for (word_ptr = 0; word_ptr <= in_ptr; word_ptr++)
 	{
-		if (j == b)
+		if (word_ptr == max_ptr)
 		{
-			j = j + max + 1;
+			word_ptr = word_ptr + max;
 		}
-		buffer[res++] = buffer[j];
+		*out_ptr = *word_ptr;
 	}
+	puts(buffer);
+	return 0;
 }
