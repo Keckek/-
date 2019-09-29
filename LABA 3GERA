@@ -4,43 +4,60 @@
 #define NO 0
 #define MAXLINE 1000
 
+void process_line(char buffer[]);
+
 int main(void)
 {
-	char buffer[MAXLINE];
+	char line[MAXLINE];
 	printf("please, enter some words \n");
-	gets(buffer);
-	char c;          // Текущий символ
-	int f = 0;       // счетчик лишних символов
-	int i = 0 ;      // Счетчки букв в слове
-	int max = 0;     //Количетсво максимальных букв в слове
-	int word = NO;   //признак слова
-	int symb = NO;   //индикатор наличия лишних символов
-	char *in_ptr;	 // указатель на текущий символ входной строки  
+	gets(line);
+	process_line(line);
+	puts(line);
+	return 0;
+}
+
+void process_line(char buffer[])
+
+{
+	char c;// Текущий символ
+	int f = 0;// счетчик лишних символов
+	int i = 0;
+	int max = 0;
+	int word = NO;//признак слова
+	int symb = NO;//индикатор наличия лишних символов
+	char *in_ptr; // указатель на текущий символ входной строки  
 	char *out_ptr;   // указатель на текущий символn выходной строки  
-	char *word_ptr;  // указатель на начало слова 
-	char *max_ptr;   //Увказатель на начало максимального слова
+	char *word_ptr; // указатель на начало слова 
+	char *j_ptr;
+	char *max_ptr;
 	word_ptr = buffer;
 	in_ptr = buffer;
 	out_ptr = buffer;
+	j_ptr = buffer;
 	max_ptr = buffer;
 
 	do
 	{
 		c = *in_ptr; // взять текущий символ из буфера
 		if (c == ' ' || c == '.' || c == ',' || c == '\n' || c == '\0' || c == '?' || c == '!' || c == ';' || c == ':' ||
-			c == '-' || c == '_' || c == '(' || c == ')' || c == '\t' || c == '/' || c == '&' || c == '"' || c == ' ') // разделитель найден
+			c == '-' || c == '_' || c == '(' || c == ')' || c == '\t' || c == '/' || c == '&' || c == '"') // разделитель найден
 		{
-			if (word == YES && symb == NO)
+			if (i > max)
 			{
-				if (i > max)
-				{
-					max = i;
-					max_ptr = word_ptr;
-				}
+				max = i;
+				max_ptr = word_ptr;
+			}
+
+			if (symb == NO && word == YES)
+			{
+				while (word_ptr < in_ptr)
+
+					*out_ptr++ = *word_ptr++;
 			}
 			word = NO;
-			i = 0;
+			symb = NO;
 		}
+
 		else
 		{
 			if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) // проверить не является ли этот символ лишним
@@ -52,18 +69,17 @@ int main(void)
 				word_ptr = in_ptr; // запомнить позицию начала слова
 			}
 			word = YES;
-			i++;
 		}
-		in_ptr;
-	} while (c != '\0');
-	for (word_ptr = 0; word_ptr <= in_ptr; word_ptr++)
+
+		in_ptr++;
+	} while (c != '\0'); // продолжать до конца строки
+	
+	while (j_ptr <= in_ptr)
 	{
-		if (word_ptr == max_ptr)
+		if (j_ptr == max_ptr)
 		{
-			word_ptr = word_ptr + max;
+			j_ptr = j_ptr + max;
 		}
-		*out_ptr = *word_ptr;
+		j_ptr++;
 	}
-	puts(buffer);
-	return 0;
 }
