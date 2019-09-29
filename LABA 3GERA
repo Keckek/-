@@ -42,7 +42,7 @@ void process_line(char buffer[])
 		if (c == ' ' || c == '.' || c == ',' || c == '\n' || c == '\0' || c == '?' || c == '!' || c == ';' || c == ':' ||
 			c == '-' || c == '_' || c == '(' || c == ')' || c == '\t' || c == '/' || c == '&' || c == '"') // разделитель найден
 		{
-			if (i > max)
+			if (i >= max)
 			{
 				max = i;
 				max_ptr = word_ptr;
@@ -56,6 +56,7 @@ void process_line(char buffer[])
 			}
 			word = NO;
 			symb = NO;
+			i = 0;
 		}
 
 		else
@@ -70,13 +71,13 @@ void process_line(char buffer[])
 			}
 			word = YES;
 		}
-
+		i++;
 		in_ptr++;
 	} while (c != '\0'); // продолжать до конца строки
 	
 	while (j_ptr <= in_ptr)
 	{
-		if (j_ptr == max_ptr)
+		if (*j_ptr == *max_ptr)
 		{
 			j_ptr = j_ptr + max;
 		}
