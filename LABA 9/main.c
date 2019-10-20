@@ -11,7 +11,7 @@ int main(void)
 	FILE *fpin;
 	FILE *fpout;
 	char line[MAXLINE];
-	char mine[MAXLINE];
+	char mine[MAXLINE] = "";
 	char *ptr;
 	char *ptr2 = mine;
 
@@ -61,6 +61,13 @@ int main(void)
 						*ptr2++ = 'u';
 						*ptr2++ = 'r';
 					}
+					if (*ptr == '5')
+					{
+						*ptr2++ = 'f';
+						*ptr2++ = 'i';
+						*ptr2++ = 'v';
+						*ptr2++ = 'e';
+					}
 				}
 				else 
 				{
@@ -74,5 +81,4 @@ int main(void)
 		fclose(fpin); // закрыть входной файл  
 		fclose( fpout ); // закрыть выходной файл 
 		return 0;
-}
-
+}			
