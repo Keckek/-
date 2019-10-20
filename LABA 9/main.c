@@ -11,10 +11,12 @@ int main(void)
 	FILE *fpin;
 	FILE *fpout;
 	char line[MAXLINE];
+	char mine[MAXLINE];
 	char *ptr;
+	char *ptr2 = mine;
 
 	fpin = fopen("C:\\Users\\ksal\\source\\repos\\LABA9\\file.txt", "rt");
-		if (fpin == NULL)   
+		if (fpin == NULL)  
 		return;  // ошибка при открытии файла 
 
 	fpout = fopen("C:\\Users\\ksal\\source\\repos\\LABA9\\result.txt", "wt");
@@ -29,29 +31,48 @@ int main(void)
 
 			while (*ptr != '\0') // цикл до конца строки 
 			{
-				if (*ptr == "1")
+				if (*ptr == '1' || *ptr == '2' || *ptr == '3' || *ptr == '4' || *ptr == '5' || *ptr == '6' || *ptr == '7' || *ptr == '8' || *ptr == '9' || *ptr == '0'  )
 				{
-					ptr = "one";
+					if (*ptr == '1')
+					{
+						*ptr2++ = 'O';
+						*ptr2++ = 'n';
+						*ptr2++ = 'e';
+					}
+					if (*ptr == '2')
+					{
+						*ptr2++ = 'T';
+						*ptr2++ = 'w';
+						*ptr2++ = 'o';
+
+					}
+					if (*ptr == '3')
+					{
+						*ptr2++ = 't';
+						*ptr2++ = 'h';
+						*ptr2++ = 'r';
+						*ptr2++ = 'e';
+						*ptr2++ = 'e';
+					}
+					if (*ptr == '4')
+					{
+						*ptr2++ = 'f';
+						*ptr2++ = 'o';
+						*ptr2++ = 'u';
+						*ptr2++ = 'r';
+					}
 				}
-				if (*ptr == "2")
+				else 
 				{
-					ptr = "two";
+					ptr2 = *ptr;
 				}
-				if (*ptr == "3")
-				{
-					ptr = "three";
-				}
-				if (*ptr == "4")
-				{
-					ptr = "four";
-				}
-				ptr++;
+				*ptr2++;
+				*ptr++;
 			}
-			fputs(line, fpout); // запись строки 
+			fputs(mine, fpout); // запись строки 
 		}
 		fclose(fpin); // закрыть входной файл  
 		fclose( fpout ); // закрыть выходной файл 
 		return 0;
 }
-
 
