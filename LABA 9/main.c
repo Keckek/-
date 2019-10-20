@@ -13,11 +13,11 @@ int main(void)
 	char line[MAXLINE];
 	char *ptr;
 
-	fpin = fopen("test.txt", "rt");
+	fpin = fopen("C:\\Users\\ksal\\source\\repos\\LABA9\\file.txt", "rt");
 		if (fpin == NULL)   
 		return;  // ошибка при открытии файла 
 
-	fpout = fopen("result.txt", "wt");
+	fpout = fopen("C:\\Users\\ksal\\source\\repos\\LABA9\\result.txt", "wt");
 		if (fpout == NULL)
 		return;  // ошибка при открытии файла 
 
@@ -29,19 +29,19 @@ int main(void)
 
 			while (*ptr != '\0') // цикл до конца строки 
 			{
-				if (*ptr == 1)
+				if (*ptr == "1")
 				{
 					ptr = "one";
 				}
-				if (*ptr == 2)
+				if (*ptr == "2")
 				{
 					ptr = "two";
 				}
-				if (*ptr == 3)
+				if (*ptr == "3")
 				{
 					ptr = "three";
 				}
-				if (*ptr == 4)
+				if (*ptr == "4")
 				{
 					ptr = "four";
 				}
@@ -53,4 +53,5 @@ int main(void)
 		fclose( fpout ); // закрыть выходной файл 
 		return 0;
 }
+
 
